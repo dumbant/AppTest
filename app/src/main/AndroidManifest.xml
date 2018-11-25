@@ -1,21 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.soon.test.apptest">
+    package="com.soon.music">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
+        android:name="MusicPlayerApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name="com.soon.music.MusicList" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.soon.test.apptest.MainActivity">
+        </activity>
+
+        <activity android:name="com.soon.filemanager.FileManager"
+            android:label="@string/app_filemgr">
+        </activity>
+
+        <activity android:name="com.soon.cityweather.CityWeather"
+            android:label="@string/app_weather">
+        </activity>
+
+        <activity android:name="com.soon.mobilemap.MobileMap"
+            android:label="@string/app_mapname">
+        </activity>
+
+        <provider android:name="ContactsProvider"
+            android:authorities="com.yarin.android.provider.ContactsProvider"/>
+
+        <activity android:name=".MyContacts"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ContactEditor"
+            android:label="@string/editor_user">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.yarin.android.mycontacts" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/vnd.yarin.android.mycontacts" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ContactView"
+            android:label="@string/view_user">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.yarin.android.mycontacts" />
+            </intent-filter>
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/vnd.yarin.android.mycontacts" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.soon.ring.RingProfile"
+            android:label="@string/app_ring">
+        </activity>
+
+        <receiver android:name="RingBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.yarin.android.RingProfile.RV_CHANGED" />
+                <action android:name="com.yarin.android.RingProfile.RING_CHANGED" />
+                <action android:name="com.yarin.android.RingProfile.VIBRATE_CHANGED" />
+                <action android:name="com.yarin.android.RingProfile.SILENT_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:label="@string/app_date" android:name=".TodayDate">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget"></meta-data>
+        </receiver>
+        <receiver android:label="@string/app_name_small" android:name=".TodayDateSmall">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_small"></meta-data>
+        </receiver>
+
+        <service
+            android:name="com.soon.music.MusicPlayerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

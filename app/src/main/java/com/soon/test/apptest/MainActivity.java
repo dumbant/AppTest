@@ -7,6 +7,8 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import com.soon.music.R;
+
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
